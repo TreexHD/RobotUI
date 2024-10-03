@@ -1,5 +1,5 @@
 # RobotUI
- this is the Robot UI by TreexHD and Lino!
+ this is the Robot UI by TreexHD and Lino
 
 # Installation
 
