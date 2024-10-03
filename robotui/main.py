@@ -1,14 +1,16 @@
-import flask
+from flask import Flask, render_template
 
 """
 this is the main file
 """
 
-class UI:
+app = Flask(__name__, template_folder='templates')
 
-    app = flask.Flask(__name__)
 
-    @app.route('/startseite')
-    def startseite(self):
-        return "Startseiten Test!"
-    pass
+@app.route('/')
+def startseite():
+    return render_template('index.html')
+
+
+def run():
+    app.run(debug=True)
