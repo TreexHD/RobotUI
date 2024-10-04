@@ -11,7 +11,68 @@
         <div class="content">
             <h1>Robot UI</h1>
             <p>Information screen content goes here...</p>
+
+            <!-- Compact System Info Layout -->
+            <div class="system-info">
+                <!-- Status at the top -->
+                <div class="status">
+                    <div class="status-indicator running">Running</div>
+                </div>
+
+                <!-- CPU and RAM usage side by side -->
+                <div class="usage-container">
+                    <div class="cpu-usage-overall">
+                        <h4>CPU Usage</h4>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 70%;"></div>
+                        </div>
+                        <span class="cpu-overall-percentage">70%</span>
+                    </div>
+
+                    <div class="ram-usage">
+                        <h4>RAM Usage</h4>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 50%;"></div>
+                        </div>
+                        <span class="ram-percentage">50%</span>
+                    </div>
+                </div>
+
+                <!-- Per-Core CPU usage with smaller bars -->
+                <div class="cpu-usage-per-core">
+                    <h4>CPU Usage Per Core</h4>
+                    <div class="core">
+                        <label>Core 1</label>
+                        <div class="progress-bar small">
+                            <div class="progress" style="width: 60%;"></div>
+                        </div>
+                        <span class="cpu-core-percentage">60%</span>
+                    </div>
+                    <div class="core">
+                        <label>Core 2</label>
+                        <div class="progress-bar small">
+                            <div class="progress" style="width: 50%;"></div>
+                        </div>
+                        <span class="cpu-core-percentage">50%</span>
+                    </div>
+                    <div class="core">
+                        <label>Core 3</label>
+                        <div class="progress-bar small">
+                            <div class="progress" style="width: 80%;"></div>
+                        </div>
+                        <span class="cpu-core-percentage">80%</span>
+                    </div>
+                    <div class="core">
+                        <label>Core 4</label>
+                        <div class="progress-bar small">
+                            <div class="progress" style="width: 40%;"></div>
+                        </div>
+                        <span class="cpu-core-percentage">40%</span>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="sidebar">
             <div class="dropdown">
                 <label for="program-select">Select Program:</label>
@@ -29,6 +90,7 @@
             <button>Button 3</button>
         </div>
     </div>
+
     <div class="console-window">
         <p>Console output will be displayed here...</p>
         <input type="text" placeholder="Enter command...">

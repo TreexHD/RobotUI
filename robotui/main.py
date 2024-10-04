@@ -12,5 +12,5 @@ def startseite():
     return render_template('index.html')
 
 
-def run():
-    app.run(debug=True)
+def run(port):
+    app.run(debug=True, port=port)

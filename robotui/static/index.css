@@ -20,25 +20,23 @@ body {
 
 .console-window {
     flex: 1;
-    display: flex;
-    flex-direction: column;
     background-color: #333;
     color: #fff;
     padding: 20px;
     overflow-y: auto;
     border-radius: 0 0 10px 10px;
-    position: relative; /* To keep the input at the bottom */
+    position: relative;
 }
 
 .console-window input {
-    width: calc(100% - 40px); /* Adjust for padding on both sides */
+    width: calc(100% - 40px);
     padding: 10px;
-    margin-top: auto; /* Pushes the input to the bottom */
+    margin-top: auto;
     border: none;
     border-radius: 5px;
-    margin-bottom: 10px; /* Adds clearance at the bottom */
-    margin-left: 10px; /* Left padding */
-    margin-right: 10px; /* Right padding */
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .sidebar {
@@ -86,4 +84,94 @@ body {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+/* Compact System Info */
+.system-info {
+    margin-top: 20px;
+}
+
+/* Status Indicator */
+.status-indicator {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745;
+    margin-bottom: 15px;
+}
+
+.status-indicator.running {
+    background-color: #28a745;
+}
+
+.status-indicator.stopped {
+    background-color: #dc3545;
+}
+
+.status-indicator.paused {
+    background-color: #ffc107;
+}
+
+/* Side-by-side layout for CPU and RAM usage */
+.usage-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.cpu-usage-overall, .ram-usage {
+    flex: 1;
+    margin-right: 20px;
+}
+
+h4 {
+    margin-bottom: 5px;
+}
+
+/* Progress Bars */
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-bar.small {
+    height: 10px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 10px;
+}
+
+.cpu-usage-overall .progress {
+    background-color: #28a745;
+}
+
+.cpu-usage-overall .cpu-overall-percentage,
+.ram-usage .ram-percentage,
+.cpu-usage-per-core .cpu-core-percentage {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Compact Per-Core CPU Usage */
+.cpu-usage-per-core .core {
+    margin-bottom: 10px;
+}
+
+.cpu-usage-per-core label {
+    font-size: 12px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.cpu-usage-per-core .progress-bar.small .progress {
+    background-color: #007bff;
 }
