@@ -14,13 +14,14 @@ def main():
 if __name__ == "__main__":
     THandler = TaskHandler()
 
+    THandler.disable_log()
     THandler.set_start_program_func(main)
 
     THandler.create_web_site()
     THandler.start_web_site()
 
-    THandler.create_sys()
-    THandler.start_sys()
+    #THandler.create_sys()
+    #THandler.start_sys()
 
     while True:
         try:

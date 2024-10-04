@@ -4,23 +4,29 @@ document.addEventListener('DOMContentLoaded', () => {
     StatusFunc();
 });
 
-function CPUFunc(){
+function CPUFunc(data){
     // Set CPU usage dynamically
-    let cpuPercentage = 65; // Example value
+    let cpuPercentage = data; // Example value
     document.querySelector('.cpu-usage-overall .progress').style.width = cpuPercentage + '%';
     document.querySelector('.cpu-usage-overall .cpu-overall-percentage').textContent = cpuPercentage + '%';
 }
 
-function RAMFunc(){
+function RAMFunc(data){
     // Set RAM usage dynamically
-    let ramPercentage = 50; // Example value
+    let ramPercentage = data; // Example value
     document.querySelector('.ram-usage .progress').style.width = ramPercentage + '%';
     document.querySelector('.ram-usage .ram-percentage').textContent = ramPercentage + '%';
 }
 
-function StatusFunc(){
+function StatusFunc(data){
+    let status = 'stopped'; // Example values: 'running', 'stopped', 'paused'
+    if(data == 1){
+        status = 'running'
+    }else if(data == 0){
+        status = 'stopped'
+    }
     // Set status dynamically
-    let status = 'running'; // Example values: 'running', 'stopped', 'paused'
+
     let statusIndicator = document.querySelector('.status-indicator');
     statusIndicator.classList.remove('running', 'stopped', 'paused');
     statusIndicator.classList.add(status);
@@ -39,3 +45,17 @@ function pressedButton(datas){
         body: JSON.stringify(data),
     })
 }
+
+function fetchStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    StatusFunc(data.status.message);
+                    CPUFunc(data.status.cpu_load);
+                    RAMFunc(data.status.ram_load);
+                })
+                .catch(error => console.error('Error fetching status:', error));
+        }
+
+// Fetch status every 1 seconds
+setInterval(fetchStatus, 1000);

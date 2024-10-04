@@ -7,6 +7,7 @@ class SysThread(SThread):
         self.func = func
 
     def init(self):
+        self.dct['is_sys_thread_running'] = True
         self.func()
 
     def loop(self):

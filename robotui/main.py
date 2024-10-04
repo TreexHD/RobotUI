@@ -23,8 +23,10 @@ class TaskHandler:
             self.sysTask = None
             self.program_func = None
             dct = manager.dict()
+            dct['disable_log'] = False
             dct['stop_sys_thread'] = False
             dct['start_sys_thread'] = False
+            dct['is_sys_thread_running'] = False
 
             self.dct = dct
 
@@ -32,11 +34,15 @@ class TaskHandler:
         time.sleep(.1)
         if self.dct['stop_sys_thread']:
             self.dct['stop_sys_thread'] = False
+            self.dct['is_sys_thread_running'] = False
             self.stop_sys()
-        if self.dct['start_sys_thread']:
+        if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running'] == False:
             self.dct['start_sys_thread'] = False
             self.create_sys()
             self.start_sys()
+
+    def disable_log(self):
+        self.dct['disable_log'] = True
 
     def set_start_program_func(self, func):
         self.program_func = func
@@ -57,5 +63,6 @@ class TaskHandler:
         self.sysTask.start()
 
     def stop_sys(self):
-        self.sysTask.killing()
+        if self.sysTask is not None:
+            self.sysTask.killing()
 
