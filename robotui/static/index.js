@@ -26,3 +26,16 @@ function StatusFunc(){
     statusIndicator.classList.add(status);
     statusIndicator.textContent = status.charAt(0).toUpperCase() + status.slice(1);
 }
+
+function pressedButton(datas){
+    //Send to python if Stop Button pressed
+    const data = {value: datas};
+
+    fetch('/btn', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+}

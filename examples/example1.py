@@ -4,22 +4,27 @@ import time
 
 
 def main():
-    print("Hello")
-    time.sleep(1)
+    i = 1
+    while True:
+        print(i)
+        time.sleep(3)
+        i += 1
 
 
 if __name__ == "__main__":
     THandler = TaskHandler()
 
+    THandler.set_start_program_func(main)
+
     THandler.create_web_site()
     THandler.start_web_site()
 
-    THandler.create_sys(main)
+    THandler.create_sys()
     THandler.start_sys()
 
     while True:
         try:
-            time.sleep(1)
+            THandler.update()
         except KeyboardInterrupt:
             Debug.okblue("CTRL + C ... Halting")
             THandler.stop_web_site()
