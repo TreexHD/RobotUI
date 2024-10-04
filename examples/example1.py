@@ -1,6 +1,7 @@
-import robotui.main
+from robotui.main import TaskHandler
 
 
 
 if __name__ == "__main__":
-    robotui.main.run(port=80)
+    THandler = TaskHandler()
+    THandler.start_web_site()
