@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.info-screen {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #ccc;
+    border-radius: 10px 10px 0 0;
+}
+
+.console-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    overflow-y: auto;
+    border-radius: 0 0 10px 10px;
+    position: relative; /* To keep the input at the bottom */
+}
+
+.console-window input {
+    width: calc(100% - 40px); /* Adjust for padding on both sides */
+    padding: 10px;
+    margin-top: auto; /* Pushes the input to the bottom */
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Adds clearance at the bottom */
+    margin-left: 10px; /* Left padding */
+    margin-right: 10px; /* Right padding */
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.sidebar button {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #0056b3;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.sidebar button:hover {
+    background-color: #004494;
+}
+
+.sidebar .start {
+    background-color: #28a745;
+}
+
+.sidebar .stop {
+    background-color: #dc3545;
+}
+
+.sidebar .restart {
+    background-color: #ffc107;
+}
+
+.dropdown {
+    margin-bottom: 20px;
+}
+
+.dropdown select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
