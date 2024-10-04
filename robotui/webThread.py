@@ -1,4 +1,4 @@
-from robotui.sThread import SThread
+from robotui.sthread import SThread
 from flask import Flask, render_template
 
 app = Flask(__name__, template_folder='templates')
@@ -10,12 +10,15 @@ def startseite():
 
 
 def run(port):
-    app.run(debug=True, port=port)
+    app.run(debug=False, port=port)
 
 
-class webThread(SThread):
+class WebThread(SThread):
     def __init__(self, name, dct):
         super().__init__(name, dct)
 
+    def init(self):
+        pass
+
     def loop(self):
-        run(50)
+        run( 80)

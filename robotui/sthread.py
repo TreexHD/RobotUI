@@ -1,6 +1,6 @@
 import multiprocessing
 import traceback
-from debug import Debug
+from robotui.debug import Debug
 """
 this file contains the sThread
 """
@@ -14,10 +14,11 @@ class SThread(multiprocessing.Process):
         super().__init__()
         self.dct = dct
         self.name = name
-        self.running = False
+        self.running = True
+        Debug.okblue(" (Threading) Created:  " + self.name)
 
     def run(self):
-        Debug.okblue(" (Threading) Starting " + self.name)
+        Debug.okblue(" (Threading) Starting: " + self.name)
         try:
             self.running = True
             self.init()
