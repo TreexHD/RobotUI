@@ -11,7 +11,7 @@
     <div class="info-screen">
         <div class="content">
             <h1>Robot UI</h1>
-            <p>Information screen content goes here...</p>
+            <p>Program: unknown</p>
 
             <!-- Compact System Info Layout -->
             <div class="system-info">
@@ -78,9 +78,6 @@
             <div class="dropdown">
                 <label for="program-select">Select Program:</label>
                 <select id="program-select">
-                    <option value="program1">Program 1</option>
-                    <option value="program2">Program 2</option>
-                    <option value="program3">Program 3</option>
                 </select>
             </div>
             <button onclick="pressedButton(1)" class="start">Start</button>
@@ -93,9 +90,13 @@
     </div>
 
     <div class="console-window">
-        <p>Console output will be displayed here...</p>
+        <p id="console"></p>
+    </div>
+
+    <div class="console-input">
         <input type="text" placeholder="Enter command...">
     </div>
+
 </body>
 
 </html>

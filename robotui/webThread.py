@@ -1,5 +1,4 @@
 from collections.abc import Callable
-
 from robotui.sthread import SThread
 from flask import Flask, render_template, request, jsonify
 
@@ -37,13 +36,25 @@ def button_stop():
 @app.route('/status')
 def status():
     dct = dict_callback()
+    console = str(dct['console'])
     stat = dct['is_sys_thread_running']
     cpu_load = 50
     ram_load = 40
     var = {
         "cpu_load": cpu_load,
         "ram_load": ram_load,
-        "message": int(not stat) + 1
+        "message": int(not stat) + 1,
+        "console": console
+    }
+    dct['console'] = ""
+    return jsonify(status=var)
+
+@app.route('/pgm')
+def program_select():
+    dct = dict_callback()
+
+    var = {
+        "first": str(dct['program_names'])
     }
     return jsonify(status=var)
 

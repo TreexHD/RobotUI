@@ -1,5 +1,4 @@
 import time
-
 from robotui.webThread import WebThread
 from robotui.sysThread import SysThread
 import multiprocessing
@@ -19,19 +18,25 @@ class TaskHandler:
 
     def __init__(self):
             manager = multiprocessing.Manager()
+
             self.websiteTask = None
             self.sysTask = None
+            self.programs = []
             self.program_func = None
             dct = manager.dict()
+            dct['program_names'] = "" # separated by ! .First  one is the selected.
+            dct['console'] = ""
             dct['disable_log'] = False
             dct['stop_sys_thread'] = False
             dct['start_sys_thread'] = False
             dct['is_sys_thread_running'] = False
-
+            dct['console'] += "[BLUE]Booted...[END] <br>"
             self.dct = dct
 
+
     def update(self):
-        time.sleep(.1)
+        time.sleep(1)
+        print(self.dct['program_names'])
         if self.dct['stop_sys_thread']:
             self.dct['stop_sys_thread'] = False
             self.dct['is_sys_thread_running'] = False
@@ -44,8 +49,21 @@ class TaskHandler:
     def disable_log(self):
         self.dct['disable_log'] = True
 
-    def set_start_program_func(self, func):
-        self.program_func = func
+    def save_other_programs(self, selected):
+        for i in self.programs:
+            if i[0] != selected:
+                self.dct['program_names'] += i[0] + "!"
+
+
+    def append_program(self, name, func):
+        self.programs.append((name, func))
+
+    def set_start_program_func(self, name):
+        for i in self.programs:
+            if i[0] == name:
+                self.program_func = i[1]
+        self.dct['program_names'] += name + "!"
+        self.save_other_programs(name)
 
     def create_web_site(self):
         self.websiteTask = WebThread("Web",self.dct)

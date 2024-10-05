@@ -3,23 +3,34 @@ from robotui.main import TaskHandler
 import time
 
 
-def main():
+def main(console):
     i = 1
     while True:
-        print(i)
-        time.sleep(3)
+        console("[RED]"+ str(i) + "[END]")
+        time.sleep(.5)
         i += 1
+
+def test(console):
+    i = 100
+    while True:
+        console("[GREEN]"+ str(i) + "[END]")
+        time.sleep(.5)
+        i -= 1
 
 
 if __name__ == "__main__":
     THandler = TaskHandler()
 
-    THandler.disable_log()
-    THandler.set_start_program_func(main)
+    #THandler.disable_log()
+
+    THandler.append_program("Main", main)
+    THandler.append_program("TEST", test)
+    THandler.set_start_program_func("Main")
 
     THandler.create_web_site()
     THandler.start_web_site()
 
+    #Autostart the selected programm
     #THandler.create_sys()
     #THandler.start_sys()
 
