@@ -25,6 +25,7 @@ class TaskHandler:
             self.program_func = None
             dct = manager.dict()
             dct['program_names'] = "" # separated by ! .First  one is the selected.
+            dct['program_active'] = ""
             dct['console'] = ""
             dct['disable_log'] = False
             dct['stop_sys_thread'] = False
@@ -35,16 +36,23 @@ class TaskHandler:
 
 
     def update(self):
-        time.sleep(1)
-        print(self.dct['program_names'])
+        time.sleep(.5)
+        if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running']:
+            self.dct['start_sys_thread'] = False
+        if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running'] == False:
+            self.dct['start_sys_thread'] = False
+            self.update_sys_thread_func()
+            self.create_sys()
+            self.start_sys()
         if self.dct['stop_sys_thread']:
             self.dct['stop_sys_thread'] = False
             self.dct['is_sys_thread_running'] = False
             self.stop_sys()
-        if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running'] == False:
-            self.dct['start_sys_thread'] = False
-            self.create_sys()
-            self.start_sys()
+
+    def update_sys_thread_func(self):
+        for i in self.programs:
+            if i[0] == self.dct['program_active']:
+                self.program_func = i[1]
 
     def disable_log(self):
         self.dct['disable_log'] = True

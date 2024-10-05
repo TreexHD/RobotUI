@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     RAMFunc();
     StatusFunc();
     ConsoleFunc('[BLUE]Ready...[END]');
-
+    fetch_get_Program();
 });
 
 function CPUFunc(data){
@@ -11,6 +11,12 @@ function CPUFunc(data){
     let cpuPercentage = data; // Example value
     document.querySelector('.cpu-usage-overall .progress').style.width = cpuPercentage + '%';
     document.querySelector('.cpu-usage-overall .cpu-overall-percentage').textContent = cpuPercentage + '%';
+}
+
+function CurrentProgram(data){
+    //set the current program that is running
+    const currentElement = document.getElementById("current_program");
+    currentElement.innerHTML = "Program:" + data
 }
 
 function RAMFunc(data){
@@ -78,13 +84,13 @@ function StatusFunc(data){
     statusIndicator.textContent = status.charAt(0).toUpperCase() + status.slice(1);
 }
 
-function fetch_get_Program(data){
+function fetch_get_Program(){
     fetch('/pgm')
         .then(response => response.json())
         .then(data => {
-            StatusFunc(data.status.message);
+            ProgramAddOptions(data.status.prog);
     })
-    .catch(error => console.error('Error fetching program:', error));
+    .catch(error => console.error('Error fetching programs:', error));
 
 }
 
@@ -112,7 +118,8 @@ function ProgramGetSelectedOption() {
 
 function pressedButton(datas){
     //Send to python if Stop Button pressed
-    const data = {value: datas};
+    const data = {value: datas,
+                  program: ProgramGetSelectedOption()};
 
     fetch('/btn', {
         method: 'POST',
@@ -124,16 +131,17 @@ function pressedButton(datas){
 }
 
 function fetchStatus() {
-            fetch('/status')
-                .then(response => response.json())
-                .then(data => {
-                    StatusFunc(data.status.message);
-                    CPUFunc(data.status.cpu_load);
-                    RAMFunc(data.status.ram_load);
-                    ConsoleFunc(data.status.console);
-                })
-                .catch(error => console.error('Error fetching status:', error));
-        }
+    fetch('/status')
+        .then(response => response.json())
+        .then(data => {
+            StatusFunc(data.status.message);
+            CPUFunc(data.status.cpu_load);
+            RAMFunc(data.status.ram_load);
+            ConsoleFunc(data.status.console);
+            CurrentProgram(data.status.program)
+        })
+        .catch(error => console.error('Error fetching status:', error));
+}
 
 // Fetch status every 1 seconds
 setInterval(fetchStatus, 1000);

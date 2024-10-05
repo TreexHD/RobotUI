@@ -38,13 +38,15 @@ def status():
     dct = dict_callback()
     console = str(dct['console'])
     stat = dct['is_sys_thread_running']
+    prog = dct['program_active']
     cpu_load = 50
     ram_load = 40
     var = {
         "cpu_load": cpu_load,
         "ram_load": ram_load,
         "message": int(not stat) + 1,
-        "console": console
+        "console": console,
+        "program": str(prog)
     }
     dct['console'] = ""
     return jsonify(status=var)
@@ -52,14 +54,15 @@ def status():
 @app.route('/pgm')
 def program_select():
     dct = dict_callback()
+    data = str(dct['program_names'])[:-1]
 
     var = {
-        "first": str(dct['program_names'])
+        "prog": data
     }
     return jsonify(status=var)
 
 def run(port):
-    app.run(debug=False, port=port, )
+    app.run(debug=False, port=port)
 
 class WebThread(SThread):
     def __init__(self, name, dct):
@@ -78,6 +81,7 @@ class WebThread(SThread):
         if value['value'] == 2:
             self.dct['stop_sys_thread'] = True
         if value['value'] == 1:
+            self.dct['program_active'] = value['program']
             self.dct['start_sys_thread'] = True
 
     def get_dct(self):
