@@ -11,6 +11,7 @@ setup(
     author="TreexHD, LinoDino",
     author_email="<no.mail>",
     description=DESCRIPTION,
+    include_package_data=True,
     packages=find_packages(),
     install_requires=[
         'flask>=3.0.3',
@@ -23,6 +24,5 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System :: Unix",
         "Operating System :: Microsoft :: Windows",
-    ],
-    data_files = [('', ['robotui/templates/index.html'])]
+    ]
 )
