@@ -23,5 +23,6 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System :: Unix",
         "Operating System :: Microsoft :: Windows",
-    ]
+    ],
+    data_files = [('', ['templates/index.html'])]
 )
