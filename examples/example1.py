@@ -1,22 +1,22 @@
 from robotui.debug import Debug
 from robotui.main import TaskHandler
-import importlib
+#from yourprog import your_progr1, your_progr2
 
 
 def main(console):
-    #importlib.reload(module=)
-    # use external files
-    pass
+    #use extra files!!! like this...
+    #your_progr1(console)
+    pass # remove this
 
 def test(console):
-    #importlib.reload(module=)
-    #use external files
-    pass
+    #your_progr2(console)
+    pass # remove this
 
 
 if __name__ == "__main__":
     THandler = TaskHandler()
 
+    THandler.set_update_rate(1)
     #THandler.disable_log()
 
     THandler.append_program("Main", main)

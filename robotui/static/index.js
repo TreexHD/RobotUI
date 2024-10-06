@@ -1,3 +1,5 @@
+var update_rate = 500;
+
 document.addEventListener('DOMContentLoaded', () => {
     //CPUFunc();
     RAMFunc();
@@ -5,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ConsoleFunc('[BLUE]Ready...[END]');
     fetch_get_Program();
 });
+
+
+
 
 function CPUFunc(data) {
     // Split the input string by '!'
@@ -182,10 +187,10 @@ function fetchStatus() {
             CPUFunc(data.status.cpu_load);
             RAMFunc(data.status.ram_load);
             ConsoleFunc(data.status.console);
-            CurrentProgram(data.status.program)
+            CurrentProgram(data.status.program);
         })
         .catch(error => console.error('Error fetching status:', error));
 }
 
 // Fetch status every 1 seconds
-setInterval(fetchStatus, 1000);
+setInterval(fetchStatus, update_rate);

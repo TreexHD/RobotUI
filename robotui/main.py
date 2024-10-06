@@ -23,6 +23,7 @@ class TaskHandler:
             self.sysTask = None
             self.programs = []
             self.program_func = None
+            self.update_rate = 1
             dct = manager.dict()
             dct['program_names'] = "" # separated by ! .First  one is the selected.
             dct['program_active'] = ""
@@ -32,11 +33,21 @@ class TaskHandler:
             dct['start_sys_thread'] = False
             dct['is_sys_thread_running'] = 0
             dct['console'] += "[BLUE]Booted...[END] <br>"
+            dct['update_rate'] = 1000
             self.dct = dct
 
 
+    def set_update_rate(self, updates_per_sec: float):
+        """
+        set rate of updates for the web page
+        :param updates_per_sec: updates per second
+        :return:
+        """
+        self.dct['update_rate']= int(1000 / updates_per_sec)
+        self.update_rate = 1 / updates_per_sec
+
     def update(self):
-        time.sleep(.5)
+        time.sleep(self.update_rate)
         if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running'] == 1:
             self.dct['start_sys_thread'] = False
         if self.dct['start_sys_thread'] and (self.dct['is_sys_thread_running'] == 0 or self.dct['is_sys_thread_running'] == 2):
