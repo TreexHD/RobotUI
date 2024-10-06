@@ -24,5 +24,5 @@ setup(
         "Operating System :: Unix",
         "Operating System :: Microsoft :: Windows",
     ],
-    data_files = [('', ['templates/index.html'])]
+    data_files = [('', ['robotui/templates/index.html'])]
 )
