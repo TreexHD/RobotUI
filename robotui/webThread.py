@@ -3,7 +3,7 @@ from robotui.sthread import SThread
 from flask import Flask, render_template, request, jsonify
 import psutil
 import pkg_resources
-package_folder = pkg_resources.resource_filename('your_package_name', '')
+package_folder = pkg_resources.resource_filename('robotui', '')
 
 app = Flask(__name__, template_folder=package_folder + "/templates")
 
