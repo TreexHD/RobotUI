@@ -1,1 +1,3 @@
 include robotui/templates/index.html
+include robotui/static/index.js
+include robotui/static/index.css

@@ -2,8 +2,10 @@ from collections.abc import Callable
 from robotui.sthread import SThread
 from flask import Flask, render_template, request, jsonify
 import psutil
+import pkg_resources
+package_folder = pkg_resources.resource_filename('your_package_name', '')
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder=package_folder + "/templates")
 
 def disable_log():
     import logging
