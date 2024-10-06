@@ -130,11 +130,11 @@ body {
     background-color: #28a745;
 }
 
-.status-indicator.stopped {
+.status-indicator.crashed {
     background-color: #dc3545;
 }
 
-.status-indicator.paused {
+.status-indicator.stopped {
     background-color: #ffc107;
 }
 
@@ -181,6 +181,11 @@ h4 {
 .cpu-usage-per-core .cpu-core-percentage {
     font-size: 14px;
     font-weight: bold;
+}
+
+.cpu-usage-per-core {
+    max-height: 25vh; /* Ensures the height doesn't exceed half of the viewport height */
+    overflow: auto;
 }
 
 .cpu-usage-per-core .core {

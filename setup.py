@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.5.0'
+VERSION = '0.5.1'
 DESCRIPTION = 'this is the robot UI library'
 LONG_DESCRIPTION = 'A package that allows easy access to all functions of the robot via a UI in the web browser'
 
@@ -13,7 +13,8 @@ setup(
     description=DESCRIPTION,
     packages=find_packages(),
     install_requires=[
-        'flask>=3.0.3'
+        'flask>=3.0.3',
+        'psutil'
     ],
     keywords=['python'],
     classifiers=[

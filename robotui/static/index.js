@@ -1,16 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-    CPUFunc();
+    //CPUFunc();
     RAMFunc();
     StatusFunc();
     ConsoleFunc('[BLUE]Ready...[END]');
     fetch_get_Program();
 });
 
-function CPUFunc(data){
-    // Set CPU usage dynamically
-    let cpuPercentage = data; // Example value
-    document.querySelector('.cpu-usage-overall .progress').style.width = cpuPercentage + '%';
-    document.querySelector('.cpu-usage-overall .cpu-overall-percentage').textContent = cpuPercentage + '%';
+function CPUFunc(data) {
+    // Split the input string by '!'
+    let values = data.split('!');
+
+    // Extract the overall CPU percentage
+    let cpuOverallPercentage = values[0];
+    document.querySelector('.cpu-usage-overall .progress').style.width = cpuOverallPercentage + '%';
+    document.querySelector('.cpu-usage-overall .cpu-overall-percentage').textContent = cpuOverallPercentage + '%';
+
+    // Get the container for per-core CPU usage
+    let cpuUsagePerCoreContainer = document.querySelector('.cpu-usage-per-core');
+    cpuUsagePerCoreContainer.innerHTML = ''; // Clear existing cores
+
+    // Extract and set the per-core CPU percentages
+    for (let i = 1; i < values.length; i++) {
+        let corePercentage = values[i];
+
+        // Create core element
+        let coreElement = document.createElement('div');
+        coreElement.classList.add('core');
+
+        // Create label
+        let label = document.createElement('label');
+        label.textContent = `Core ${i}`;
+        coreElement.appendChild(label);
+
+        // Create progress bar container
+        let progressBarContainer = document.createElement('div');
+        progressBarContainer.classList.add('progress-bar', 'small');
+
+        // Create progress bar
+        let progressBar = document.createElement('div');
+        progressBar.classList.add('progress');
+        progressBar.style.width = corePercentage + '%';
+        progressBarContainer.appendChild(progressBar);
+
+        coreElement.appendChild(progressBarContainer);
+
+        // Create percentage span
+        let percentageSpan = document.createElement('span');
+        percentageSpan.classList.add('cpu-core-percentage');
+        percentageSpan.textContent = corePercentage + '%';
+        coreElement.appendChild(percentageSpan);
+
+        // Append core element to container
+        cpuUsagePerCoreContainer.appendChild(coreElement);
+    }
 }
 
 function CurrentProgram(data){
@@ -70,16 +112,18 @@ function ConsoleFunc(data) {
 }
 
 function StatusFunc(data){
-    let status = 'stopped'; // Example values: 'running', 'stopped', 'paused'
+    let status = 'stopped'; // Example values: 'running', 'stopped', 'crashed'
     if(data == 1){
         status = 'running'
     }else if(data == 0){
         status = 'stopped'
+    }else if(data == 2){
+        status = 'crashed'
     }
     // Set status dynamically
 
     let statusIndicator = document.querySelector('.status-indicator');
-    statusIndicator.classList.remove('running', 'stopped', 'paused');
+    statusIndicator.classList.remove('running', 'stopped', 'crashed');
     statusIndicator.classList.add(status);
     statusIndicator.textContent = status.charAt(0).toUpperCase() + status.slice(1);
 }

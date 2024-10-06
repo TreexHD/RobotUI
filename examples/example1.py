@@ -1,21 +1,17 @@
 from robotui.debug import Debug
 from robotui.main import TaskHandler
-import time
+import importlib
 
 
 def main(console):
-    i = 1
-    while True:
-        console("[RED]"+ str(i) + "[END]")
-        time.sleep(.5)
-        i += 1
+    #importlib.reload(module=)
+    # use external files
+    pass
 
 def test(console):
-    i = 100
-    while True:
-        console("[GREEN]"+ str(i) + "[END]")
-        time.sleep(.5)
-        i -= 1
+    #importlib.reload(module=)
+    #use external files
+    pass
 
 
 if __name__ == "__main__":

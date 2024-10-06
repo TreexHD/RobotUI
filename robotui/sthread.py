@@ -26,6 +26,7 @@ class SThread(multiprocessing.Process):
                 self.loop()
             Debug.okblue("(Threading) Stopped:  " + self.name)
         except BaseException as e:
+            self.dct['is_sys_thread_running'] = 2
             Debug.okblue("(Threading) Died:  " + self.name)
             traceback.print_exc()
             Debug.okblue("Because of: ")

@@ -30,23 +30,23 @@ class TaskHandler:
             dct['disable_log'] = False
             dct['stop_sys_thread'] = False
             dct['start_sys_thread'] = False
-            dct['is_sys_thread_running'] = False
+            dct['is_sys_thread_running'] = 0
             dct['console'] += "[BLUE]Booted...[END] <br>"
             self.dct = dct
 
 
     def update(self):
         time.sleep(.5)
-        if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running']:
+        if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running'] == 1:
             self.dct['start_sys_thread'] = False
-        if self.dct['start_sys_thread'] and self.dct['is_sys_thread_running'] == False:
+        if self.dct['start_sys_thread'] and (self.dct['is_sys_thread_running'] == 0 or self.dct['is_sys_thread_running'] == 2):
             self.dct['start_sys_thread'] = False
             self.update_sys_thread_func()
             self.create_sys()
             self.start_sys()
         if self.dct['stop_sys_thread']:
             self.dct['stop_sys_thread'] = False
-            self.dct['is_sys_thread_running'] = False
+            self.dct['is_sys_thread_running'] = 0
             self.stop_sys()
 
     def update_sys_thread_func(self):

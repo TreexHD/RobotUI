@@ -1,6 +1,7 @@
 from collections.abc import Callable
 from robotui.sthread import SThread
 from flask import Flask, render_template, request, jsonify
+import psutil
 
 app = Flask(__name__, template_folder='templates')
 
@@ -22,6 +23,23 @@ def set_btn_callback(callback):
     btn_callback = callback
 
 
+def get_system_usage():
+    # Get RAM usage
+    ram_usage = psutil.virtual_memory().percent
+
+    # Get overall CPU usage
+    cpu_usage = psutil.cpu_percent(interval=1)
+
+    # Get individual CPU core usages
+    cpu_core_usages = psutil.cpu_percent(interval=1, percpu=True)
+
+    return {
+        'ram_usage': ram_usage,
+        'cpu_usage': cpu_usage,
+        'cpu_core_usages': cpu_core_usages
+    }
+
+
 @app.route('/')
 def startseite():
     return render_template('index.html')
@@ -36,15 +54,19 @@ def button_stop():
 @app.route('/status')
 def status():
     dct = dict_callback()
+    usage = get_system_usage()
     console = str(dct['console'])
     stat = dct['is_sys_thread_running']
     prog = dct['program_active']
+    cores = ""
+    for i, core_usage in enumerate(usage['cpu_core_usages']):
+        cores+= "!" + str(core_usage)
     cpu_load = 50
     ram_load = 40
     var = {
-        "cpu_load": cpu_load,
-        "ram_load": ram_load,
-        "message": int(not stat) + 1,
+        "cpu_load": str(usage['cpu_usage']) + cores,
+        "ram_load": usage['ram_usage'],
+        "message": int(stat),
         "console": console,
         "program": str(prog)
     }
