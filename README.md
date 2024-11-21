@@ -1,7 +1,9 @@
 # RobotUI
  this is the Robot UI by TreexHD and Lino
 
-(https://github.com/TreexHD/RobotUI/tree/main/data/look.png)
+<p align="center">
+  <img src="https://github.com/TreexHD/RobotUI/blob/main/data/look.png" width="350" title="The UI">
+</p>
 
 # Installation
 
